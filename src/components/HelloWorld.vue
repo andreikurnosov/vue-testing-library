@@ -20,6 +20,11 @@ export default defineComponent({
     return {
       name: ''
     }
+  },
+  methods: {
+    submit() {
+      this.$emit('submit', { name: this.name })
+    }
   }
 })
 </script>

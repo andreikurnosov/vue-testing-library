@@ -12,7 +12,7 @@ describe('HelloWorld.vue', () => {
   it('renders props.msg when passed', async () => {
     const msg = 'new message'
 
-    render(HelloWorld, {
+    const { emitted } = render(HelloWorld, {
       props: { msg }
     })
 
@@ -24,17 +24,18 @@ describe('HelloWorld.vue', () => {
     // waitFor(() => {
     //   expect(screen.queryByText(msg)).toBeInTheDocument()
     // })
-
     // expect(await screen.findByText(msg)).toBeInTheDocument()
 
     const $button = screen.getByRole('button', { name: 'Submit' })
     expect($button).toBeDisabled()
 
-    fireEvent.update(screen.getByLabelText('Name'), 'Andrei')
+    await fireEvent.update(screen.getByLabelText('Name'), 'Andrei')
 
-    waitFor(() => {
-      expect($button).not.toBeDisabled()
-    })
+    expect($button).not.toBeDisabled()
+
+    fireEvent.click($button)
+
+    // expect(emitted().submit[0][0]).toEqual({name: 'Andrei'})
     
   })
 })
