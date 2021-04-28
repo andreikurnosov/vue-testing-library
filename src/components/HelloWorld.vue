@@ -1,9 +1,10 @@
 <template>
   <div class="hello">
-    <button @click="show = true" role="show-text"></button>
-    <div v-if="show">
-      {{ msg }}
-    </div>
+    <form @submit.prevent="submit">
+      <label for="name">Name</label>
+      <input v-model="name" id="name" />
+      <button role="button" :disabled="!name.length">Submit</button>
+    </form>
   </div>
 </template>
 
@@ -17,7 +18,7 @@ export default defineComponent({
   },
   data() {
     return {
-      show: false
+      name: ''
     }
   }
 })

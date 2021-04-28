@@ -19,12 +19,22 @@ describe('HelloWorld.vue', () => {
     // expect(screen.getByText(msg)).toBeInTheDocument()
     // screen.getByText(msg)
 
-    fireEvent.click(screen.getByRole('show-text'))
-    
+    // fireEvent.click(screen.getByRole('show-text'))
+
     // waitFor(() => {
     //   expect(screen.queryByText(msg)).toBeInTheDocument()
     // })
 
-    expect(await screen.findByText(msg)).toBeInTheDocument()
+    // expect(await screen.findByText(msg)).toBeInTheDocument()
+
+    const $button = screen.getByRole('button', { name: 'Submit' })
+    expect($button).toBeDisabled()
+
+    fireEvent.update(screen.getByLabelText('Name'), 'Andrei')
+
+    waitFor(() => {
+      expect($button).not.toBeDisabled()
+    })
+    
   })
 })
