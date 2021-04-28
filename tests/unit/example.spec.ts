@@ -1,4 +1,10 @@
-import { findByText, render, screen } from '@testing-library/vue'
+import {
+  findByText,
+  render,
+  screen,
+  fireEvent,
+  waitFor
+} from '@testing-library/vue'
 import '@testing-library/jest-dom'
 import HelloWorld from '@/components/HelloWorld.vue'
 
@@ -13,6 +19,9 @@ describe('HelloWorld.vue', () => {
     // expect(screen.getByText(msg)).toBeInTheDocument()
     // screen.getByText(msg)
 
-    expect(screen.queryByText('asdf')).not.toBeInTheDocument()
+    fireEvent.click(screen.getByRole('show-text'))
+    waitFor(() => {
+      expect(screen.queryByText(msg)).toBeInTheDocument()
+    })
   })
 })
