@@ -9,7 +9,7 @@ import '@testing-library/jest-dom'
 import HelloWorld from '@/components/HelloWorld.vue'
 
 describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
+  it('renders props.msg when passed', async () => {
     const msg = 'new message'
 
     render(HelloWorld, {
@@ -20,8 +20,11 @@ describe('HelloWorld.vue', () => {
     // screen.getByText(msg)
 
     fireEvent.click(screen.getByRole('show-text'))
-    waitFor(() => {
-      expect(screen.queryByText(msg)).toBeInTheDocument()
-    })
+    
+    // waitFor(() => {
+    //   expect(screen.queryByText(msg)).toBeInTheDocument()
+    // })
+
+    expect(await screen.findByText(msg)).toBeInTheDocument()
   })
 })
